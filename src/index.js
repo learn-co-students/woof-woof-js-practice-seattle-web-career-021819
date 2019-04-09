@@ -114,7 +114,6 @@ function fetchPostBadDog(pup){
     },
     body: JSON.stringify({isGoodDog: false})
   })
-  fetchPups(PUPS_URL)
 }
 
 function fetchPostGoodDog(pup){
@@ -125,7 +124,6 @@ function fetchPostGoodDog(pup){
     },
     body: JSON.stringify({isGoodDog: true})
   })
-  fetchPups(PUPS_URL)
 }
 
 fetchPups(PUPS_URL)
