@@ -5,19 +5,22 @@ fetch(PUPURL)
 .then(data => {
   console.log(data)
   renderDogNames(data)
-  addFilterListener()
+  addFilterListener(data)
 })
 
-const addFilterListener = () => {
+const addFilterListener = (dogs) => {
 let filter = document.getElementById('good-dog-filter')
 filter.addEventListener('click', () => {
   console.log("filter button clicked")
-  changeFilter()
+  changeFilter(dogs)
 })
 }
 
 const renderDogNames = (dogs) => {
   let div = document.getElementById('dog-bar')
+  while(div.firstChild){
+    div.firstChild.remove()
+  }
   dogs.forEach(function(dog){
   let span = document.createElement('span')
   span.textContent = dog.name
@@ -89,16 +92,24 @@ const changeDoggyStatus = (dog) => {
 
 
 
-const changeFilter = () => {
+const changeFilter = (dogs) => {
   let div = document.getElementById('filter-div')
   let button = document.getElementById('good-dog-filter')
   if(button.innerText === "Filter good dogs: ON"){
     button.innerText = "Filter good dogs: OFF"
+    renderDogNames(dogs)
   } else {
     button.innerText = "Filter good dogs: ON"
+    let goodDogs = []
+    dogs.forEach(function (dog){
+      if (dog.isGoodDog === true) {
+        goodDogs.push(dog)
+      }
+    })
+    renderDogNames(goodDogs)
   }
   div.appendChild(button)
 
-  
+
 
 }
